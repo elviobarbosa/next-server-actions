@@ -43,6 +43,12 @@ export async function getAuthData() {
     return JSON.parse(auth)
 }
 
+export async function logout() {
+    const cookiesStore = cookies();
+    cookiesStore.delete('auth');
+    redirect('/login')
+}
+
 export async function setAuthData(jwtToken: string) {
     const payloadBase64 = jwtToken.split('.')[1];
     const payload = JSON.parse(atob(payloadBase64));
